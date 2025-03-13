@@ -10,8 +10,11 @@ import image5 from "../assests/Images/img4.jpg";
 import image6 from "../assests/Images/img5.jpg";
 import image7 from "../assests/Images/img6.jpg";
 import image8 from "../assests/Images/img7.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Packages = () => {
+  const navigate = useNavigate();
+
   const travelPackages = [
     {
       title: "Beach Vacation",
@@ -141,6 +144,124 @@ const Packages = () => {
               View Hotels
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* Benefits Section with Descriptions */}
+      <div className="mt-10 w-full max-w-6xl bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4">
+          Your TravelOne Credit Card also gives you:
+        </h2>
+        <ul className="list-none pl-0">
+          <li className="flex items-center mb-2">
+            <span className="text-green-600 text-2xl mr-2">✔️</span>
+            <span className="font-bold text-lg">
+              15% off at Yatra
+              <br />{" "}
+              <span className="font-normal text-base">
+                Save on international and domestic flights and hotels when you
+                book through the Yatra app or website. T&Cs apply (PDF).
+              </span>
+            </span>
+          </li>
+          <li className="flex items-center mb-2">
+            <span className="text-green-600 text-2xl mr-2">✔️</span>
+            <span className="font-bold text-lg">
+              15% off at EaseMyTrip
+              <br />{" "}
+              <span className="font-normal text-base">
+                Save on international and domestic flights and hotels when you
+                book through the EaseMyTrip app or website. T&Cs apply (PDF).
+              </span>
+            </span>
+          </li>
+          <li className="flex items-center mb-2">
+            <span className="text-green-600 text-2xl mr-2">✔️</span>
+            <span className="font-bold text-lg">
+              15% off at Paytm
+              <br />{" "}
+              <span className="font-normal text-base">
+                Save on international and domestic flights when you book through
+                the Paytm app or website. T&Cs apply (PDF).
+              </span>
+            </span>
+          </li>
+          <li className="flex items-center mb-2">
+            <span className="text-green-600 text-2xl mr-2">✔️</span>
+            <span className="font-bold text-lg">
+              15% off at ClearTrip
+              <br />{" "}
+              <span className="font-normal text-base">
+                Save on international and domestic flights when you book through
+                the ClearTrip app or website. T&Cs apply (PDF).
+              </span>
+            </span>
+          </li>
+          <li className="flex items-center mb-2">
+            <span className="text-green-600 text-2xl mr-2">✔️</span>
+            <span className="font-bold text-lg">
+              11% off at StayVista
+              <br />
+              <span className="font-normal text-base">
+                Stay for less when you make a hotel booking through the
+                StayVista website (max 2 bookings per card per year; max saving
+                per booking INR3,000). T&Cs apply (PDF).
+              </span>
+            </span>
+          </li>
+          <li className="flex items-center mb-2">
+            <span className="text-green-600 text-2xl mr-2">✔️</span>
+            <span className="font-bold text-lg">
+              10% off at Zomato
+              <br />
+              <span className="font-normal text-base">
+                Enjoy up to 10% off on events and dining through the Zomato app.
+                Plus, get 2 for 1 movie tickets (max 2 times per month; max
+                single ticket value INR200). T&Cs apply (PDF).
+              </span>
+            </span>
+          </li>
+          <li className="flex items-center mb-2">
+            <span className="text-green-600 text-2xl mr-2">✔️</span>
+            <span className="font-bold text-lg">
+              Up to 20% off on duty-free
+              <br />{" "}
+              <span className="font-normal text-base">
+                Save 20% on duty-free shopping via the AdaniOne app or website
+                (minimum order value INR8,000; once per card per year; max
+                savings INR3,000). T&Cs apply (PDF).
+              </span>
+            </span>
+          </li>
+          <li className="flex items-center mb-2">
+            <span className="text-green-600 text-2xl mr-2">✔️</span>
+            <span className="font-bold text-lg">
+              Access to the top golf courses in India
+              <br />{" "}
+              <span className="font-normal text-base">
+                Enjoy 4 complimentary rounds of golf and 12 complimentary
+                lessons per calendar year (max 1 per calendar month). Plus, get
+                50% off your green fees for additional rounds. T&Cs apply.
+              </span>
+            </span>
+          </li>
+        </ul>
+        <h3 className="text-lg font-semibold mb-2">Who can apply?</h3>
+        <p className="text-gray-700 mb-4">To apply, you must:</p>
+        <ul className="list-disc pl-5 mb-4">
+          <li>Be at least 18 years old</li>
+          <li>Have a valid ID proof</li>
+          <li>Meet the income criteria</li>
+        </ul>
+
+        {/* Rewards Dashboard Link */}
+        <div className="mt-10 w-full flex justify-center">
+          <button
+            onClick={() => navigate("/rewards")}
+            className="bg-green-600 text-white py-2 rounded mt-4 hover:bg-green-700 transition duration-200 w-full max-w-sm"
+          >
+            Go to Rewards Dashboard
+          </button>
         </div>
       </div>
     </div>

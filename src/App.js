@@ -6,6 +6,7 @@ import Home from "./Components/Home";
 import Quiz from "./Components/Quiz";
 import Results from "./Components/Results";
 import Packages from "./Components/Packages";
+import RewardsDashboard from "./Components/RewardsDashboard";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/results" element={<Results score={0} />} />
         <Route path="/packages" element={<Packages />} />
+        <Route path="/rewards" element={<RewardsDashboard />} />
       </Routes>
     </Router>
   );

@@ -1,15 +1,62 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Quiz = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
-  // Check if location.state is available
-  const { title, questions } = location.state || {
-    title: "Quiz",
-    questions: JSON.parse(localStorage.getItem("quizQuestions")) || [],
-  };
+  const staticQuestions = [
+    {
+      question: "What is the largest planet in our solar system?",
+      options: ["Earth", "Mars", "Jupiter", "Saturn"],
+      answer: "Jupiter",
+    },
+    {
+      question: "Who wrote 'Romeo and Juliet'?",
+      options: ["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"],
+      answer: "William Shakespeare",
+    },
+    {
+      question: "What is the chemical symbol for gold?",
+      options: ["Ag", "Au", "Pb", "Fe"],
+      answer: "Au",
+    },
+    {
+      question: "Which continent is the Sahara Desert located in?",
+      options: ["Asia", "Africa", "Australia", "South America"],
+      answer: "Africa",
+    },
+    {
+      question: "What is the capital city of Japan?",
+      options: ["Beijing", "Seoul", "Bangkok", "Tokyo"],
+      answer: "Tokyo",
+    },
+    {
+      question: "Which gas do plants absorb from the atmosphere?",
+      options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Helium"],
+      answer: "Carbon Dioxide",
+    },
+    {
+      question: "Who painted the Mona Lisa?",
+      options: ["Pablo Picasso", "Vincent van Gogh", "Leonardo da Vinci", "Claude Monet"],
+      answer: "Leonardo da Vinci",
+    },
+    {
+      question: "What is the smallest unit of life?",
+      options: ["Organ", "Tissue", "Cell", "Atom"],
+      answer: "Cell",
+    },
+    {
+      question: "Which ocean is the largest in the world?",
+      options: ["Atlantic", "Indian", "Pacific", "Arctic"],
+      answer: "Pacific",
+    },
+    {
+      question: "How many continents are there on Earth?",
+      options: ["5", "6", "7", "8"],
+      answer: "7",
+    },
+  ];
+  
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -19,9 +66,10 @@ const Quiz = () => {
 
   const handleOptionSelect = (index) => {
     setSelectedOption(index);
-    // Check if the selected option is correct (assuming the last option is the correct one)
+    // Check if the selected option is correct
     const isCorrect =
-      index === questions[currentQuestionIndex].options.length - 1;
+      staticQuestions[currentQuestionIndex].options[index] ===
+      staticQuestions[currentQuestionIndex].answer;
     setIsAnswerCorrect(isCorrect);
     if (isCorrect) {
       setScore((prevScore) => prevScore + 1);
@@ -36,7 +84,7 @@ const Quiz = () => {
 
   const handleFinishQuiz = () => {
     // Logic to finish the quiz (e.g., navigate to results)
-    navigate("/results", { state: { score, total: questions.length } });
+    navigate("/results", { state: { score, total: staticQuestions.length } });
   };
 
   const handleRestart = () => {
@@ -48,7 +96,7 @@ const Quiz = () => {
   };
 
   // Redirect to QuizInput if no questions are available
-  if (questions.length === 0) {
+  if (staticQuestions.length === 0) {
     return (
       <div className="p-4 min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 flex flex-col items-center justify-center">
         <h2 className="text-3xl font-bold text-white mb-4">
@@ -73,7 +121,7 @@ const Quiz = () => {
         <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-2xl font-bold mb-4">Quiz Results</h2>
           <p className="text-lg">
-            You answered {score} out of {questions.length} questions.
+            You answered {score} out of {staticQuestions.length} questions.
           </p>
           <button
             className="bg-blue-600 text-white py-2 rounded mt-4 hover:bg-blue-700 transition duration-200 w-full"
@@ -85,24 +133,26 @@ const Quiz = () => {
       ) : (
         <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-xl font-bold mb-4">
-            {questions[currentQuestionIndex].question}
+            {staticQuestions[currentQuestionIndex].question}
           </h2>
           <div className="flex flex-col">
-            {questions[currentQuestionIndex].options.map((option, index) => (
-              <button
-                key={index}
-                className={`bg-blue-500 text-white py-2 rounded mb-2 hover:bg-blue-600 transition duration-200 ${
-                  selectedOption === index
-                    ? isAnswerCorrect
-                      ? "bg-green-600"
-                      : "bg-red-600"
-                    : "bg-blue-500 hover:bg-blue-600"
-                }`}
-                onClick={() => handleOptionSelect(index)}
-              >
-                {option}
-              </button>
-            ))}
+            {staticQuestions[currentQuestionIndex].options.map(
+              (option, index) => (
+                <button
+                  key={index}
+                  className={`bg-blue-500 text-white py-2 rounded mb-2 hover:bg-blue-600 transition duration-200 ${
+                    selectedOption === index
+                      ? isAnswerCorrect
+                        ? "bg-green-600"
+                        : "bg-red-600"
+                      : "bg-blue-500 hover:bg-blue-600"
+                  }`}
+                  onClick={() => handleOptionSelect(index)}
+                >
+                  {option}
+                </button>
+              )
+            )}
           </div>
           {selectedOption !== null && (
             <div className="mt-4">
@@ -117,13 +167,13 @@ const Quiz = () => {
               )}
               <button
                 onClick={
-                  currentQuestionIndex < questions.length - 1
+                  currentQuestionIndex < staticQuestions.length - 1
                     ? handleNextQuestion
                     : handleFinishQuiz
                 }
                 className="bg-blue-600 text-white py-2 rounded mt-4 hover:bg-blue-700 transition duration-200"
               >
-                {currentQuestionIndex < questions.length - 1
+                {currentQuestionIndex < staticQuestions.length - 1
                   ? "Next Question"
                   : "Finish Quiz"}
               </button>
